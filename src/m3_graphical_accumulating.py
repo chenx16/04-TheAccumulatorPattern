@@ -97,7 +97,7 @@ def draw_parallel_lines(n, point, length, window):
     """
     x=point.x
     y=point.y
-    for _ in range(n):
+    for k in range(n):
         line=rg.Line(rg.Point(x,y),rg.Point(x+length,y))
         y=y+30
         line.attach_to(window)
@@ -170,11 +170,14 @@ def draw_lines(n, point, window):
     """
     pX=point.x
     pY=point.y
+    a = rg.Point(pX + 100, pY - 100)
     for _ in range(n):
-        line=rg.Line(rg.Point(pX,pY),rg.Point(pX,))
-
+        line=rg.Line(point,a)
+        a.y=a.y + 200 / (n-1)
+        line.attach_to(window)
+    window.render()
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # done: 3. Implement and test this function.
     #          Tests have been written for you (above).
     #
     # CONSIDER using the ACCUMULATOR IN GRAPHICS pattern,
