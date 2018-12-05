@@ -142,7 +142,7 @@ def run_test_draw_circles_from_rectangle():
     draw_circles_from_rectangle(4, 5, rectangle, window1)
 
     # Test 2:
-    rectangle = rg.Rectangle(rg.Point(900, 500), rg.Point(1000, 350))
+    rectangle = rg.Rectangle(rg.Point(900, 350), rg.Point(1000, 500))
     rectangle.fill_color = 'blue'
     rectangle.outline_color = 'red'
     draw_circles_from_rectangle(2, 3, rectangle, window1)
@@ -164,7 +164,7 @@ def run_test_draw_circles_from_rectangle():
     window2.close_on_mouse_click()
 
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement this TEST function.
+    # done: 3. Implement this TEST function.
     #   It TESTS the  draw_circles_from_rectangle  function
     #   defined below.  Include at least **   3   ** tests, of which
     #      ***  at least TWO tests are on ONE window and
@@ -223,12 +223,12 @@ def draw_circles_from_rectangle(m, n, rectangle, window):
         circle.attach_to(window)
         circle.fill_color='red'
     for k in range(n):
-        circle1=rg.Circle(rg.Point(rectangle.get_center().x,rectangle.corner_1.y-rectangle.get_width()*(k+1)),rectangle.get_width()/2)
+        circle1=rg.Circle(rg.Point(rectangle.get_center().x,rectangle.corner_1.y-rectangle.get_width()*(k+1/2)),rectangle.get_width()/2)
         circle1.attach_to(window)
         circle1.outline_color='blue'
     window.render()
     # -------------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # done: 4. Implement and test this function.
     #          Tests have been written for you (above).
     #
     # CONSIDER using the ACCUMULATOR IN GRAPHICS pattern,
@@ -319,6 +319,22 @@ def draw_lines_from_rectangles(rectangle1, rectangle2, n, window):
       :type n: int
       :type window: rg.RoseWindow
       """
+    Line=rg.Line((rectangle1.get_center()),(rectangle2.get_center()))
+    L1.attach_to(window)
+    for k in range(n):
+        x=rectangle1.get_center().x
+        y=rectangle1.get_center().y
+        x1=rectangle1.get_lower_left_corner().x
+        y1=rectangle1.get_lower_left_corner().y
+        line=line.move_by((x-x1)*(k+1),(y- y1)*(k+1))
+        if _ % 2 == 0:
+            line.color = rectangle1.outline_color
+        else:
+            line.color = rectangle2.outline_color
+        line.attach_to(window)
+    window.render()
+
+
     # -------------------------------------------------------------------------
     # TODO: 5. Implement and test this function.
     #          Tests have been written for you (above).
