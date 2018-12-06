@@ -136,13 +136,13 @@ def run_test_draw_circles_from_rectangle():
     window1 = rg.RoseWindow(1200, 800, title)
 
     # Test 1:
-    rectangle = rg.Rectangle(rg.Point(500, 400), rg.Point(700, 520))
+    rectangle = rg.Rectangle(rg.Point(400, 600), rg.Point(500, 670))
     rectangle.fill_color = 'green'
     rectangle.outline_color = 'purple'
     draw_circles_from_rectangle(4, 5, rectangle, window1)
 
     # Test 2:
-    rectangle = rg.Rectangle(rg.Point(900, 350), rg.Point(1000, 500))
+    rectangle = rg.Rectangle(rg.Point(900, 400), rg.Point(1000, 500))
     rectangle.fill_color = 'blue'
     rectangle.outline_color = 'red'
     draw_circles_from_rectangle(2, 3, rectangle, window1)
@@ -156,7 +156,7 @@ def run_test_draw_circles_from_rectangle():
     window2 = rg.RoseWindow(1200, 800, title)
 
     # Test 3:
-    rectangle = rg.Rectangle(rg.Point(220, 400), rg.Point(340, 500))
+    rectangle = rg.Rectangle(rg.Point(440, 400), rg.Point(500, 500))
     rectangle.fill_color = 'pink'
     rectangle.outline_color = 'yellow'
     draw_circles_from_rectangle(4, 6, rectangle, window2)
@@ -319,24 +319,25 @@ def draw_lines_from_rectangles(rectangle1, rectangle2, n, window):
       :type n: int
       :type window: rg.RoseWindow
       """
-    Line=rg.Line((rectangle1.get_center()),(rectangle2.get_center()))
-    L1.attach_to(window)
     for k in range(n):
+        line = rg.Line((rectangle1.get_center()), (rectangle2.get_center()))
         x=rectangle1.get_center().x
         y=rectangle1.get_center().y
         x1=rectangle1.get_lower_left_corner().x
         y1=rectangle1.get_lower_left_corner().y
-        line=line.move_by((x-x1)*(k+1),(y- y1)*(k+1))
-        if _ % 2 == 0:
+        line.move_by(-(x-x1)*(k),-(y- y1)*(k))
+        if ((k+1) % 2 == 0):
             line.color = rectangle1.outline_color
         else:
-            line.color = rectangle2.outline_color
+            line.color=rectangle2.outline_color
         line.attach_to(window)
+    rectangle1.attach_to(window)
+    rectangle2.attach_to(window)
     window.render()
 
 
     # -------------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # done: 5. Implement and test this function.
     #          Tests have been written for you (above).
     #
     # CONSIDER using the ACCUMULATOR IN GRAPHICS pattern,
